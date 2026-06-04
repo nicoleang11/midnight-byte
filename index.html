@@ -161,6 +161,8 @@ START SCAN
 
 <script>
 
+let answers = {};
+
 function startScan(){
 
 document.querySelector(".container").innerHTML = `
@@ -177,15 +179,93 @@ Question 01
 
 <br><br>
 
-<button>😵 快死了</button>
+<button onclick="q2('dead')">😵 快死了</button>
 
 <br><br>
 
-<button>😐 還好</button>
+<button onclick="q2('normal')">😐 還好</button>
 
 <br><br>
 
-<button>😎 很有精神</button>
+<button onclick="q2('good')">😎 很有精神</button>
+
+`;
+
+}
+
+function q2(energy){
+
+answers.energy = energy;
+
+document.querySelector(".container").innerHTML = `
+
+<h1>SYSTEM SCAN</h1>
+
+<div class="subtitle">
+Question 02
+</div>
+
+<div class="info">
+現在在做什麼？
+</div>
+
+<br><br>
+
+<button onclick="showResult('movie')">
+🎬 看電影
+</button>
+
+<br><br>
+
+<button onclick="showResult('game')">
+🎮 打遊戲
+</button>
+
+<br><br>
+
+<button onclick="showResult('phone')">
+📱 滑手機
+</button>
+
+<br><br>
+
+<button onclick="showResult('youtube')">
+📺 看 YouTube
+</button>
+
+`;
+
+}
+
+function showResult(activity){
+
+answers.activity = activity;
+
+document.querySelector(".container").innerHTML = `
+
+<h1>MISSION RESULT</h1>
+
+<div class="subtitle">
+Scan Complete
+</div>
+
+<div class="info">
+🍗 鹹酥雞
+</div>
+
+<div class="info">
+🧋 珍珠奶茶
+</div>
+
+<div class="info">
+🍰 泡芙
+</div>
+
+<br>
+
+<div class="status">
+Compatibility : 96%
+</div>
 
 `;
 
