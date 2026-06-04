@@ -153,11 +153,43 @@ STATUS : ONLINE
 MISSION : FIND FOOD
 </div>
 
-<button>
+<button onclick="startScan()">
 START SCAN
 </button>
 
 </div>
 
-</body>
+<script>
+
+function startScan(){
+
+document.querySelector(".container").innerHTML = `
+
+<h1>SYSTEM SCAN</h1>
+
+<div class="subtitle">
+Question 01
+</div>
+
+<div class="info">
+今天有多累？
+</div>
+
+<br><br>
+
+<button>😵 快死了</button>
+
+<br><br>
+
+<button>😐 還好</button>
+
+<br><br>
+
+<button>😎 很有精神</button>
+
+`;
+
+}
+
+</script></body>
 </html>
