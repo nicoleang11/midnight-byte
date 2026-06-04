@@ -8,42 +8,118 @@
 
 <style>
 
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#050510;
+    color:white;
+    font-family:Arial, sans-serif;
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#050510;
-    color:white;
-    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+/* 背景霓虹光 */
+
+body::before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    background:radial-gradient(circle,
+    rgba(255,0,180,0.25),
+    transparent 70%);
+    top:-200px;
+    left:-200px;
+}
+
+body::after{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    background:radial-gradient(circle,
+    rgba(0,200,255,0.25),
+    transparent 70%);
+    bottom:-200px;
+    right:-200px;
+}
+
+/* 掃描線 */
+
+.scanline{
+    position:fixed;
+    width:100%;
+    height:2px;
+    background:rgba(255,255,255,0.15);
+    animation:scan 5s linear infinite;
+}
+
+@keyframes scan{
+    from{
+        top:-10px;
+    }
+    to{
+        top:100%;
+    }
 }
 
 .container{
     text-align:center;
+    z-index:10;
 }
 
 h1{
+    font-size:4rem;
     color:#ff4fd8;
-    text-shadow:0 0 20px #ff4fd8;
+    text-shadow:
+    0 0 10px #ff4fd8,
+    0 0 20px #ff4fd8,
+    0 0 40px #ff4fd8;
+    margin-bottom:20px;
 }
 
-p{
+.subtitle{
     color:#7ad7ff;
+    font-size:1.2rem;
+    margin-bottom:40px;
+}
+
+.info{
+    margin:10px 0;
+    color:#d9d9d9;
+    letter-spacing:2px;
 }
 
 button{
-    background:#111;
+    margin-top:40px;
+    padding:18px 45px;
+    background:transparent;
+    color:#fff;
     border:2px solid #7ad7ff;
-    color:white;
-    padding:15px 30px;
-    border-radius:10px;
+    border-radius:12px;
     cursor:pointer;
-    font-size:18px;
+    font-size:1.1rem;
+    letter-spacing:2px;
+    transition:0.3s;
 }
 
 button:hover{
-    box-shadow:0 0 20px #7ad7ff;
+    box-shadow:
+    0 0 10px #7ad7ff,
+    0 0 20px #7ad7ff,
+    0 0 40px #7ad7ff;
+    transform:scale(1.05);
+}
+
+.status{
+    color:#00ff99;
 }
 
 </style>
@@ -51,28 +127,32 @@ button:hover{
 
 <body>
 
+<div class="scanline"></div>
+
 <div class="container">
 
 <h1>MIDNIGHT BYTE</h1>
 
-    
-<p>Late Night Mission Control</p>
+<div class="subtitle">
+Late Night Mission Control
+</div>
 
-    
-<p>USER_01 : Nicole</p>
-<p>USER_02 : Allen</p>
+<div class="info">
+USER_01 : Nicole
+</div>
 
-    
-    <div class="info status">
+<div class="info">
+USER_02 : Allen
+</div>
+
+<div class="info status">
 STATUS : ONLINE
 </div>
 
-    
 <div class="info">
 MISSION : FIND FOOD
 </div>
 
-    
 <button>
 START SCAN
 </button>
