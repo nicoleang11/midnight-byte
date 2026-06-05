@@ -25,7 +25,6 @@ function showArchive(){
 
 app.innerHTML = `
 
-...
 `;
 
 }
