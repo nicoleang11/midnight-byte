@@ -21,9 +21,22 @@ document.getElementById("startBtn")
 .addEventListener("click", startScan);
 
 document.getElementById("archiveBtn")
-.addEventListener("click", showArchive);
+function showArchive(){
 
-function startScan(){
+app.innerHTML = `
+
+...
+`;
+
+}
+
+window.startScan = startScan;
+window.q2 = q2;
+window.q3 = q3;
+window.q4 = q4;
+window.showResult = showResult;
+window.acceptMission = acceptMission;
+window.showArchive = showArchive;
 
 app.innerHTML = `
 
