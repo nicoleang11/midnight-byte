@@ -1,382 +1,252 @@
-```javascript
 const app = document.getElementById("app");
 
+const archive =
+JSON.parse(localStorage.getItem("midnightArchive")) || [];
+
 const cookieMessages = [
-  "Requesting Chicken...",
-  "Monitoring Snack Activity...",
-  "Waiting For Food Drop...",
-  "Searching For Snacks...",
-  "Sleeping..."
+"Requesting Chicken...",
+"Monitoring Snack Activity...",
+"Waiting For Food Drop...",
+"Searching For Snacks..."
 ];
 
-const cookieElement = document.getElementById("cookieStatus");
+const cookieStatus = document.getElementById("cookieStatus");
 
-if (cookieElement) {
-  cookieElement.textContent =
-    cookieMessages[Math.floor(Math.random() * cookieMessages.length)];
+if(cookieStatus){
+cookieStatus.textContent =
+cookieMessages[Math.floor(Math.random()*cookieMessages.length)];
 }
+
+document.getElementById("startBtn")
+.addEventListener("click", startScan);
+
+document.getElementById("archiveBtn")
+.addEventListener("click", showArchive);
+
+window.q1 = q1;
+window.q2 = q2;
+window.q3 = q3;
+window.showResult = showResult;
+window.acceptMission = acceptMission;
 
 let answers = {};
 
-const archive =
-  JSON.parse(localStorage.getItem("midnightArchive")) || [];
+function startScan(){
 
-/* 首頁按鈕 */
+app.innerHTML = `
+<div class="dashboard">
 
-const startBtn = document.getElementById("startBtn");
-const archiveBtn = document.getElementById("archiveBtn");
+<h1>SYSTEM SCAN</h1>
 
-if (startBtn) {
-  startBtn.addEventListener("click", startScan);
-}
+<p class="subtitle">
+Question 01 / 03
+</p>
 
-if (archiveBtn) {
-  archiveBtn.addEventListener("click", showArchive);
-}
+<div class="action-panel">
 
-/* 讓 HTML onclick 可以找到 */
+<button class="cyber-btn" onclick="q1('tired')">
+😵 快死了
+</button>
 
-window.startScan = startScan;
-window.q2 = q2;
-window.q3 = q3;
-window.q4 = q4;
-window.showResult = showResult;
-window.acceptMission = acceptMission;
-window.showArchive = showArchive;
+<button class="cyber-btn" onclick="q1('normal')">
+😐 還好
+</button>
 
-/* Q1 */
+<button class="cyber-btn" onclick="q1('good')">
+😎 很有精神
+</button>
 
-function startScan() {
+</div>
 
-  app.innerHTML = `
-  <div class="dashboard">
-
-    <h1>SYSTEM SCAN</h1>
-
-    <p class="subtitle">
-      Question 01 / 04
-    </p>
-
-    <br>
-
-    <h2>今天有多累？</h2>
-
-    <br>
-
-    <div class="action-panel">
-
-      <button class="cyber-btn" onclick="q2('dead')">
-        😵 快死了
-      </button>
-
-      <button class="cyber-btn" onclick="q2('normal')">
-        😐 還好
-      </button>
-
-      <button class="cyber-btn" onclick="q2('good')">
-        😎 很有精神
-      </button>
-
-    </div>
-
-  </div>
-  `;
+</div>
+`;
 
 }
 
-/* Q2 */
+function q1(value){
 
-function q2(value) {
+answers.energy = value;
 
-  answers.energy = value;
+app.innerHTML = `
+<div class="dashboard">
 
-  app.innerHTML = `
-  <div class="dashboard">
+<h1>QUESTION 02</h1>
 
-    <h1>SYSTEM SCAN</h1>
+<div class="action-panel">
 
-    <p class="subtitle">
-      Question 02 / 04
-    </p>
+<button class="cyber-btn" onclick="q2('movie')">
+🎬 看電影
+</button>
 
-    <br>
+<button class="cyber-btn" onclick="q2('game')">
+🎮 打遊戲
+</button>
 
-    <h2>現在在做什麼？</h2>
+<button class="cyber-btn" onclick="q2('phone')">
+📱 滑手機
+</button>
 
-    <br>
+</div>
 
-    <div class="action-panel">
-
-      <button class="cyber-btn" onclick="q3('movie')">
-        🎬 看電影
-      </button>
-
-      <button class="cyber-btn" onclick="q3('game')">
-        🎮 打遊戲
-      </button>
-
-      <button class="cyber-btn" onclick="q3('phone')">
-        📱 滑手機
-      </button>
-
-      <button class="cyber-btn" onclick="q3('work')">
-        💻 工作
-      </button>
-
-      <button class="cyber-btn" onclick="q3('youtube')">
-        📺 YouTube
-      </button>
-
-    </div>
-
-  </div>
-  `;
+</div>
+`;
 
 }
 
-/* Q3 */
+function q2(value){
 
-function q3(value) {
+answers.activity = value;
 
-  answers.activity = value;
+app.innerHTML = `
+<div class="dashboard">
 
-  app.innerHTML = `
-  <div class="dashboard">
+<h1>QUESTION 03</h1>
 
-    <h1>SYSTEM SCAN</h1>
+<div class="action-panel">
 
-    <p class="subtitle">
-      Question 03 / 04
-    </p>
+<button class="cyber-btn" onclick="q3('delivery')">
+🛵 外送
+</button>
 
-    <br>
+<button class="cyber-btn" onclick="q3('drive')">
+🚗 開車
+</button>
 
-    <h2>今晚模式？</h2>
+</div>
 
-    <br>
-
-    <div class="action-panel">
-
-      <button class="cyber-btn" onclick="q4('diet')">
-        😇 克制一下
-      </button>
-
-      <button class="cyber-btn" onclick="q4('normal')">
-        😎 正常
-      </button>
-
-      <button class="cyber-btn" onclick="q4('free')">
-        😈 放飛自我
-      </button>
-
-    </div>
-
-  </div>
-  `;
+</div>
+`;
 
 }
 
-/* Q4 */
+function q3(value){
 
-function q4(value) {
+answers.transport = value;
 
-  answers.mode = value;
-
-  app.innerHTML = `
-  <div class="dashboard">
-
-    <h1>SYSTEM SCAN</h1>
-
-    <p class="subtitle">
-      Question 04 / 04
-    </p>
-
-    <br>
-
-    <h2>行動模式？</h2>
-
-    <br>
-
-    <div class="action-panel">
-
-      <button class="cyber-btn" onclick="showResult('home')">
-        🏠 不想出門
-      </button>
-
-      <button class="cyber-btn" onclick="showResult('delivery')">
-        🛵 外送
-      </button>
-
-      <button class="cyber-btn" onclick="showResult('drive')">
-        🚗 可以開車
-      </button>
-
-    </div>
-
-  </div>
-  `;
+showResult();
 
 }
 
-/* 結果 */
+function showResult(){
 
-function showResult(value) {
+const foods = [
 
-  answers.transport = value;
+"🍗 炸雞",
+"🍕 披薩",
+"🍔 漢堡",
+"🍜 泡麵",
+"🍣 生魚片",
+"🥟 水餃",
+"🥘 火鍋"
 
-  const results = [
-    {
-      food: "🍗 炸雞",
-      drink: "🧋 珍珠奶茶",
-      dessert: "🍰 卡士達泡芙",
-      reason: "適合今晚放鬆模式",
-      score: 96
-    },
-    {
-      food: "🍕 披薩",
-      drink: "🥤 飲料",
-      dessert: "🍪 零食",
-      reason: "適合共享",
-      score: 89
-    },
-    {
-      food: "🍔 漢堡",
-      drink: "🧋 珍奶",
-      dessert: "🍰 泡芙",
-      reason: "快速滿足",
-      score: 84
-    }
-  ];
+];
 
-  app.innerHTML = `
-  <div class="dashboard">
+const top1 =
+foods[Math.floor(Math.random()*foods.length)];
 
-    <h1>MISSION RESULT</h1>
+app.innerHTML = `
+<div class="dashboard">
 
-    <p class="subtitle">
-      Top Recommendations
-    </p>
+<h1>MISSION RESULT</h1>
 
-    ${results.map((item,index)=>`
+<div class="status-item">
 
-      <div class="status-item">
+<h2>TOP 1</h2>
 
-        <h2>TOP ${index+1}</h2>
+<br>
 
-        <br>
+${top1}
 
-        主餐：${item.food}
+<br><br>
 
-        <br><br>
+推薦原因：
 
-        飲料：${item.drink}
+今晚很適合吃這個
 
-        <br><br>
+<br><br>
 
-        第二胃：${item.dessert}
+<button
+class="cyber-btn"
+onclick="acceptMission('${top1}')">
 
-        <br><br>
+ACCEPT MISSION
 
-        推薦原因：${item.reason}
+</button>
 
-        <br><br>
+</div>
 
-        MISSION SCORE：${item.score}
+<br>
 
-        ${
-          index === 0
-          ?
-          `<br><br>
-          <button class="cyber-btn"
-          onclick="acceptMission('${item.food}')">
-          ACCEPT MISSION
-          </button>`
-          :
-          ""
-        }
+<button
+class="cyber-btn secondary"
+onclick="location.reload()">
 
-      </div>
+BACK HOME
 
-      <br>
+</button>
 
-    `).join("")}
-
-    <button class="cyber-btn secondary"
-    onclick="location.reload()">
-      BACK TO HOME
-    </button>
-
-  </div>
-  `;
+</div>
+`;
 
 }
 
-/* 儲存 */
+function acceptMission(food){
 
-function acceptMission(food) {
+archive.unshift({
 
-  archive.unshift({
-    date: new Date().toLocaleDateString(),
-    food: food,
-    activity: answers.activity,
-    mode: answers.mode
-  });
+date:new Date().toLocaleDateString(),
 
-  localStorage.setItem(
-    "midnightArchive",
-    JSON.stringify(archive)
-  );
+food:food
 
-  alert("Mission Saved");
+});
+
+localStorage.setItem(
+"midnightArchive",
+JSON.stringify(archive)
+);
+
+alert("Mission Saved");
 
 }
 
-/* Archive */
+function showArchive(){
 
-function showArchive() {
+app.innerHTML = `
+<div class="dashboard">
 
-  app.innerHTML = `
-  <div class="dashboard">
+<h1>MISSION ARCHIVE</h1>
 
-    <h1>MISSION ARCHIVE</h1>
+${
+archive.length===0
+?
+"<p>尚無紀錄</p>"
+:
+archive.map(item=>`
 
-    <br>
+<div class="status-item">
 
-    ${
-      archive.length === 0
-      ?
-      "<p>尚無紀錄</p>"
-      :
-      archive.map(item => `
-        <div class="status-item">
+📅 ${item.date}
 
-          📅 ${item.date}
+<br><br>
 
-          <br><br>
+🍴 ${item.food}
 
-          🍴 ${item.food}
+</div>
 
-          <br><br>
+<br>
 
-          🎮 ${item.activity}
-
-          <br><br>
-
-          ⚡ ${item.mode}
-
-        </div>
-
-        <br>
-      `).join("")
-    }
-
-    <button class="cyber-btn secondary"
-    onclick="location.reload()">
-      BACK
-    </button>
-
-  </div>
-  `;
-//test
+`).join("")
 }
-```
+
+<button
+class="cyber-btn secondary"
+onclick="location.reload()">
+
+BACK
+
+</button>
+
+</div>
+`;
+
+}
